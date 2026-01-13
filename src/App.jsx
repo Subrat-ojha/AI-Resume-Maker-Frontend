@@ -7,23 +7,27 @@ import Processing from './pages/Processing'
 import ResumeOutput from './pages/ResumeOutput'
 import Dashboard from './pages/Dashboard'
 
+import { ThemeProvider } from './contexts/ThemeContext'
+
 function App() {
     return (
-        <Router>
-            <div className="min-h-screen flex flex-col">
-                <Navbar />
-                <main className="flex-grow">
-                    <Routes>
-                        <Route path="/" element={<Landing />} />
-                        <Route path="/create" element={<PromptInput />} />
-                        <Route path="/processing" element={<Processing />} />
-                        <Route path="/resume/:id" element={<ResumeOutput />} />
-                        <Route path="/dashboard" element={<Dashboard />} />
-                    </Routes>
-                </main>
-                <Footer />
-            </div>
-        </Router>
+        <ThemeProvider>
+            <Router>
+                <div className="min-h-screen flex flex-col bg-[var(--background)] text-[var(--foreground)] transition-colors duration-500">
+                    <Navbar />
+                    <main className="flex-grow">
+                        <Routes>
+                            <Route path="/" element={<Landing />} />
+                            <Route path="/create" element={<PromptInput />} />
+                            <Route path="/processing" element={<Processing />} />
+                            <Route path="/resume/:id" element={<ResumeOutput />} />
+                            <Route path="/dashboard" element={<Dashboard />} />
+                        </Routes>
+                    </main>
+                    <Footer />
+                </div>
+            </Router>
+        </ThemeProvider>
     )
 }
 

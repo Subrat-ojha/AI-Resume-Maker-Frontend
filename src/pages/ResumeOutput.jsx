@@ -61,18 +61,18 @@ const ResumeOutput = () => {
     }
 
     return (
-        <div className="min-h-[calc(100vh-80px)] bg-gray-50">
+        <div className="min-h-[calc(100vh-80px)] bg-[var(--background)] transition-colors duration-500">
             <div className="container-custom py-8">
                 {/* Success Banner */}
                 <motion.div
                     initial={{ opacity: 0, y: -20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="bg-green-50 border border-green-200 rounded-lg p-4 mb-6 flex items-center"
+                    className="bg-green-500/10 border border-green-500/20 rounded-lg p-4 mb-6 flex items-center"
                 >
-                    <CheckCircle2 className="w-6 h-6 text-green-600 mr-3" />
+                    <CheckCircle2 className="w-6 h-6 text-green-500 mr-3" />
                     <div>
-                        <h3 className="font-semibold text-green-900">Resume Created Successfully!</h3>
-                        <p className="text-sm text-green-700">Your professional resume is ready to download and share.</p>
+                        <h3 className="font-semibold text-green-500">Resume Created Successfully!</h3>
+                        <p className="text-sm text-green-500/70">Your professional resume is ready to download and share.</p>
                     </div>
                 </motion.div>
 
@@ -81,12 +81,12 @@ const ResumeOutput = () => {
                     <div className="lg:col-span-2">
                         <Card className="p-8 md:p-12">
                             {/* Header */}
-                            <div className="border-b border-gray-200 pb-6 mb-6">
-                                <h1 className="text-4xl font-bold text-gray-900 mb-2">
+                            <div className="border-b border-[var(--border)] pb-6 mb-6">
+                                <h1 className="text-4xl font-bold text-[var(--foreground)] mb-2">
                                     {resumeData.name}
                                 </h1>
-                                <p className="text-xl text-primary-600 mb-4">{resumeData.title}</p>
-                                <div className="flex flex-wrap gap-4 text-sm text-gray-600">
+                                <p className="text-xl text-[var(--foreground)]/80 mb-4">{resumeData.title}</p>
+                                <div className="flex flex-wrap gap-4 text-sm text-[var(--foreground)]/60">
                                     <span>{resumeData.contact.email}</span>
                                     <span>•</span>
                                     <span>{resumeData.contact.phone}</span>
@@ -97,24 +97,24 @@ const ResumeOutput = () => {
 
                             {/* Summary */}
                             <div className="mb-6">
-                                <h2 className="text-xl font-semibold text-gray-900 mb-3">Professional Summary</h2>
-                                <p className="text-gray-700 leading-relaxed">{resumeData.summary}</p>
+                                <h2 className="text-xl font-semibold text-[var(--foreground)] mb-3">Professional Summary</h2>
+                                <p className="text-[var(--foreground)]/80 leading-relaxed">{resumeData.summary}</p>
                             </div>
 
                             {/* Experience */}
                             <div className="mb-6">
-                                <h2 className="text-xl font-semibold text-gray-900 mb-4">Work Experience</h2>
+                                <h2 className="text-xl font-semibold text-[var(--foreground)] mb-4">Work Experience</h2>
                                 <div className="space-y-6">
                                     {resumeData.experience.map((job, index) => (
                                         <div key={index}>
                                             <div className="flex justify-between items-start mb-2">
                                                 <div>
-                                                    <h3 className="font-semibold text-gray-900">{job.title}</h3>
-                                                    <p className="text-gray-600">{job.company}</p>
+                                                    <h3 className="font-semibold text-[var(--foreground)]">{job.title}</h3>
+                                                    <p className="text-[var(--foreground)]/60">{job.company}</p>
                                                 </div>
-                                                <span className="text-sm text-gray-500">{job.period}</span>
+                                                <span className="text-sm text-[var(--foreground)]/40">{job.period}</span>
                                             </div>
-                                            <ul className="list-disc list-inside space-y-1 text-gray-700">
+                                            <ul className="list-disc list-inside space-y-1 text-[var(--foreground)]/80">
                                                 {job.achievements.map((achievement, i) => (
                                                     <li key={i}>{achievement}</li>
                                                 ))}
@@ -126,12 +126,12 @@ const ResumeOutput = () => {
 
                             {/* Skills */}
                             <div>
-                                <h2 className="text-xl font-semibold text-gray-900 mb-3">Skills</h2>
+                                <h2 className="text-xl font-semibold text-[var(--foreground)] mb-3">Skills</h2>
                                 <div className="flex flex-wrap gap-2">
                                     {resumeData.skills.map((skill, index) => (
                                         <span
                                             key={index}
-                                            className="px-3 py-1 bg-primary-50 text-primary-700 rounded-full text-sm font-medium"
+                                            className="px-3 py-1 bg-[var(--foreground)]/5 text-[var(--foreground)]/80 rounded-full text-sm font-medium"
                                         >
                                             {skill}
                                         </span>
@@ -144,7 +144,7 @@ const ResumeOutput = () => {
                     {/* Actions Sidebar */}
                     <div className="space-y-4">
                         <Card>
-                            <h3 className="font-semibold text-lg mb-4">Actions</h3>
+                            <h3 className="font-semibold text-lg mb-4 text-[var(--foreground)]">Actions</h3>
                             <div className="space-y-3">
                                 <Button
                                     variant="primary"
@@ -174,8 +174,8 @@ const ResumeOutput = () => {
                         </Card>
 
                         <Card>
-                            <h3 className="font-semibold text-lg mb-3">Tips</h3>
-                            <ul className="space-y-2 text-sm text-gray-600">
+                            <h3 className="font-semibold text-lg mb-3 text-[var(--foreground)]">Tips</h3>
+                            <ul className="space-y-2 text-sm text-[var(--foreground)]/60">
                                 <li className="flex items-start">
                                     <CheckCircle2 className="w-4 h-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
                                     <span>Your resume is ATS-optimized</span>

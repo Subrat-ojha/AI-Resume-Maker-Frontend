@@ -3,8 +3,42 @@
 @tailwind utilities;
 
 @layer base {
+    :root {
+        --background: #fdfdfd;
+        --foreground: #000000;
+        --card: #ffffff;
+        --card-foreground: #000000;
+        --primary: #000000;
+        --primary-foreground: #ffffff;
+        --border: rgba(0, 0, 0, 0.1);
+        --muted: rgba(0, 0, 0, 0.4);
+        --accent-purple: hsla(263, 90%, 92%, 0.3);
+        --accent-sage: hsla(142, 40%, 90%, 0.2);
+        --mesh-gradient:
+            radial-gradient(at 0% 0%, hsla(263, 90%, 92%, 1) 0, transparent 50%),
+            radial-gradient(at 50% 0%, hsla(33, 100%, 94%, 1) 0, transparent 50%),
+            radial-gradient(at 100% 0%, hsla(142, 40%, 90%, 1) 0, transparent 50%);
+    }
+
+    .dark {
+        --background: #000000;
+        --foreground: #ffffff;
+        --card: #0a0a0a;
+        --card-foreground: #ffffff;
+        --primary: #ffffff;
+        --primary-foreground: #000000;
+        --border: rgba(255, 255, 255, 0.1);
+        --muted: rgba(255, 255, 255, 0.4);
+        --accent-purple: hsla(263, 90%, 15%, 0.3);
+        --accent-sage: hsla(142, 40%, 10%, 0.2);
+        --mesh-gradient:
+            radial-gradient(at 0% 0%, hsla(263, 90%, 10%, 1) 0, transparent 50%),
+            radial-gradient(at 50% 0%, hsla(280, 40%, 5%, 1) 0, transparent 50%),
+            radial-gradient(at 100% 0%, hsla(240, 30%, 5%, 1) 0, transparent 50%);
+    }
+
     body {
-        @apply bg-white text-black font-sans antialiased;
+        @apply bg-[var(--background)] text-[var(--foreground)] font-sans antialiased transition-colors duration-500;
         scroll-behavior: smooth;
     }
 
@@ -41,11 +75,11 @@
     }
 
     .btn-primary {
-        @apply px-8 py-4 rounded-full font-mono uppercase text-sm tracking-wider text-white bg-black hover:bg-gray-900 transition-all duration-300;
+        @apply px-8 py-4 rounded-full font-mono uppercase text-sm tracking-wider text-[var(--primary-foreground)] bg-[var(--primary)] hover:opacity-90 transition-all duration-300;
     }
 
     .btn-secondary {
-        @apply px-8 py-4 rounded-full font-mono uppercase text-sm tracking-wider text-black border border-black hover:bg-black hover:text-white transition-all duration-300;
+        @apply px-8 py-4 rounded-full font-mono uppercase text-sm tracking-wider text-[var(--foreground)] border border-[var(--border)] hover:bg-[var(--foreground)] hover:text-[var(--background)] transition-all duration-300;
     }
 
     .section-padding {
@@ -61,19 +95,16 @@
     }
 
     .glassmorphism {
-        @apply backdrop-blur-xl bg-white/40 border border-white/20 shadow-[0_8px_32px_0_rgba(31,38,135,0.07)];
+        @apply backdrop-blur-xl bg-white/40 dark:bg-white/5 border border-white/20 dark:border-white/10 shadow-[0_8px_32px_0_rgba(31,38,135,0.07)] dark:shadow-none;
     }
 
     .mesh-gradient {
-        background-color: #fdfdfd;
-        background-image:
-            radial-gradient(at 0% 0%, hsla(263,90%,92%,1) 0, transparent 50%),
-            radial-gradient(at 50% 0%, hsla(33,100%,94%,1) 0, transparent 50%),
-            radial-gradient(at 100% 0%, hsla(142,40%,90%,1) 0, transparent 50%);
+        background-color: var(--background);
+        background-image: var(--mesh-gradient);
     }
 
     .text-gradient {
-        @apply bg-clip-text text-transparent bg-gradient-to-r from-black via-gray-700 to-black;
+        @apply bg-clip-text text-transparent bg-gradient-to-r from-[var(--foreground)] via-[var(--muted)] to-[var(--foreground)];
     }
 }
 
@@ -87,8 +118,15 @@
     }
 
     @keyframes float {
-        0%, 100% { transform: translateY(0); }
-        50% { transform: translateY(-20px); }
+
+        0%,
+        100% {
+            transform: translateY(0);
+        }
+
+        50% {
+            transform: translateY(-20px);
+        }
     }
 
     .shine-effect {
@@ -103,12 +141,10 @@
         left: -50%;
         width: 200%;
         height: 200%;
-        background: linear-gradient(
-            45deg,
-            transparent,
-            rgba(255, 255, 255, 0.1),
-            transparent
-        );
+        background: linear-gradient(45deg,
+                transparent,
+                rgba(255, 255, 255, 0.1),
+                transparent);
         transform: rotate(45deg);
         transition: 0.5s;
     }

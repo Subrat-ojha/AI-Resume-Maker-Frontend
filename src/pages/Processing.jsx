@@ -24,7 +24,7 @@ const Processing = () => {
     }, [navigate])
 
     return (
-        <div className="min-h-[calc(100vh-80px)] bg-pastel-purple flex items-center justify-center">
+        <div className="min-h-[calc(100vh-80px)] bg-[var(--background)] flex items-center justify-center transition-colors duration-500">
             <div className="container-custom">
                 <motion.div
                     initial={{ opacity: 0, scale: 0.9 }}
@@ -41,28 +41,28 @@ const Processing = () => {
                             repeat: Infinity,
                             ease: 'easeInOut',
                         }}
-                        className="w-20 h-20 mx-auto mb-12 rounded-full bg-black flex items-center justify-center"
+                        className="w-20 h-20 mx-auto mb-12 rounded-full bg-[var(--foreground)] flex items-center justify-center transition-colors duration-500"
                     >
-                        <span className="text-white font-mono font-bold text-2xl">AI</span>
+                        <span className="text-[var(--background)] font-mono font-bold text-2xl">AI</span>
                     </motion.div>
 
                     {/* Title */}
-                    <h2 className="mb-6 text-black">Creating Your Resume</h2>
-                    <p className="text-xl text-black/70 mb-16 leading-relaxed">
+                    <h2 className="mb-6 text-[var(--foreground)]">Creating Your Resume</h2>
+                    <p className="text-xl text-[var(--foreground)]/70 mb-16 leading-relaxed">
                         Our AI is crafting your professional resume. This will only take a moment...
                     </p>
 
                     {/* Progress Bar */}
                     <div className="mb-4">
-                        <div className="w-full h-2 bg-black/10 rounded-full overflow-hidden">
+                        <div className="w-full h-2 bg-[var(--foreground)]/10 rounded-full overflow-hidden">
                             <motion.div
                                 initial={{ width: 0 }}
                                 animate={{ width: `${progress}%` }}
-                                className="h-full bg-black"
+                                className="h-full bg-[var(--foreground)]"
                                 transition={{ duration: 0.3 }}
                             />
                         </div>
-                        <p className="mono-uppercase text-xs text-black/40 mt-3">{progress}% complete</p>
+                        <p className="mono-uppercase text-xs text-[var(--foreground)]/40 mt-3">{progress}% complete</p>
                     </div>
                 </motion.div>
             </div>

@@ -21,7 +21,7 @@ const Card = ({
                 y: -8,
                 transition: { duration: 0.3 }
             } : {}}
-            className={`rounded-3xl p-8 md:p-10 transition-shadow duration-500 ${glass ? 'glassmorphism' : bgColor} ${hover ? 'hover:shadow-2xl hover:shadow-black/5' : ''} ${className}`}
+            className={`rounded-3xl p-8 md:p-10 transition-shadow duration-500 ${glass ? 'glassmorphism' : (bgColor.includes('bg-white') ? 'bg-[var(--card)]' : bgColor)} ${hover ? 'hover:shadow-2xl hover:shadow-black/5 dark:hover:shadow-white/5' : ''} ${className}`}
             {...props}
         >
             {children}

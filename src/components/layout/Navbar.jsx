@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { Menu, X } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Button from '../ui/Button'
+import ThemeToggle from '../ui/ThemeToggle'
 
 const Navbar = () => {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -10,7 +11,7 @@ const Navbar = () => {
     const navigation = [
         { name: 'Features', href: '#features' },
         { name: 'How It Works', href: '#how-it-works' },
-        { name: 'Pricing', href: '#pricing' },
+        { name: 'Pricing', href: '#pricing' }
     ]
 
     return (
@@ -19,10 +20,10 @@ const Navbar = () => {
                 <div className="flex items-center justify-between h-20">
                     {/* Logo */}
                     <Link to="/" className="flex items-center space-x-3 group">
-                        <div className="w-10 h-10 rounded-full bg-black flex items-center justify-center">
-                            <span className="text-white font-mono font-bold text-lg">AR</span>
+                        <div className="w-10 h-10 rounded-full bg-[var(--foreground)] flex items-center justify-center transition-colors duration-500">
+                            <span className="text-[var(--background)] font-mono font-bold text-lg">AR</span>
                         </div>
-                        <span className="text-xl font-bold mono-uppercase text-sm">AI Resume</span>
+                        <span className="text-xl font-bold mono-uppercase text-sm text-[var(--foreground)]">AI Resume</span>
                     </Link>
 
                     {/* Desktop Navigation */}
@@ -31,7 +32,7 @@ const Navbar = () => {
                             <a
                                 key={item.name}
                                 href={item.href}
-                                className="mono-uppercase text-xs text-black hover:text-gray-600 transition-colors"
+                                className="mono-uppercase text-xs text-[var(--foreground)]/60 hover:text-[var(--foreground)] transition-colors"
                             >
                                 {item.name}
                             </a>
@@ -40,6 +41,7 @@ const Navbar = () => {
 
                     {/* Desktop CTA */}
                     <div className="hidden md:flex items-center space-x-4">
+                        <ThemeToggle />
                         <Link to="/create">
                             <Button variant="primary" size="sm">
                                 Get Started
@@ -47,17 +49,19 @@ const Navbar = () => {
                         </Link>
                     </div>
 
-                    {/* Mobile menu button */}
-                    <button
-                        onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                        className="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors"
-                    >
-                        {mobileMenuOpen ? (
-                            <X className="w-6 h-6 text-black" />
-                        ) : (
-                            <Menu className="w-6 h-6 text-black" />
-                        )}
-                    </button>
+                    <div className="flex items-center space-x-2 md:hidden">
+                        <ThemeToggle />
+                        <button
+                            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                            className="p-2 rounded-lg hover:bg-[var(--foreground)]/5 transition-colors"
+                        >
+                            {mobileMenuOpen ? (
+                                <X className="w-6 h-6 text-[var(--foreground)]" />
+                            ) : (
+                                <Menu className="w-6 h-6 text-[var(--foreground)]" />
+                            )}
+                        </button>
+                    </div>
                 </div>
             </div>
 

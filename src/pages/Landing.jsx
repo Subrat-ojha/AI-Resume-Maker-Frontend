@@ -92,16 +92,16 @@ const Landing = () => {
                             transition={{ delay: 0.5, duration: 0.8 }}
                             className="inline-block mb-8"
                         >
-                            <span className="mono-uppercase text-[10px] px-4 py-2 bg-black text-white rounded-full tracking-[0.2em]">
+                            <span className="mono-uppercase text-[10px] px-4 py-2 bg-[var(--foreground)] text-[var(--background)] rounded-full tracking-[0.2em] transition-colors duration-500">
                                 AI-Powered Resume Builder
                             </span>
                         </motion.div>
 
-                        <h1 className="mb-8 text-black text-gradient leading-[1.1] tracking-tight">
-                            Create Your Perfect Resume in Minutes
+                        <h1 className="mb-8 text-[var(--foreground)] text-balance">
+                            Create Your Perfect Resume in <span className="text-gradient">Minutes</span>
                         </h1>
 
-                        <p className="text-xl md:text-2xl text-black/60 mb-12 max-w-3xl mx-auto leading-relaxed text-balance">
+                        <p className="text-xl md:text-2xl text-[var(--foreground)]/60 mb-12 max-w-3xl mx-auto leading-relaxed text-balance">
                             Transform your career story into a compelling, ATS-optimized resume with AI. No design skills required.
                         </p>
 
@@ -120,12 +120,12 @@ const Landing = () => {
             </section>
 
             {/* Features Section */}
-            <section id="features" className="section-padding bg-white">
+            <section id="features" className="section-padding bg-[var(--background)] transition-colors duration-500">
                 <div className="container-custom">
                     <div className="text-center max-w-3xl mx-auto mb-20">
-                        <span className="mono-uppercase text-xs text-black/60 mb-4 block">Features</span>
-                        <h2 className="mb-6 text-black">Why Choose AI Resume?</h2>
-                        <p className="text-xl text-black/70">
+                        <span className="mono-uppercase text-xs text-[var(--foreground)]/60 mb-4 block">Features</span>
+                        <h2 className="mb-6 text-[var(--foreground)]">Why Choose AI Resume?</h2>
+                        <p className="text-xl text-[var(--foreground)]/70">
                             Powerful features designed to help you stand out
                         </p>
                     </div>
@@ -156,12 +156,12 @@ const Landing = () => {
             </section>
 
             {/* How It Works Section */}
-            <section id="how-it-works" className="section-padding bg-pastel-peach">
+            <section id="how-it-works" className="section-padding bg-[var(--background)] border-y border-[var(--border)] transition-colors duration-500">
                 <div className="container-custom">
                     <div className="text-center max-w-3xl mx-auto mb-20">
-                        <span className="mono-uppercase text-xs text-black/60 mb-4 block">Process</span>
-                        <h2 className="mb-6 text-black">How It Works</h2>
-                        <p className="text-xl text-black/70">
+                        <span className="mono-uppercase text-xs text-[var(--foreground)]/60 mb-4 block">Process</span>
+                        <h2 className="mb-6 text-[var(--foreground)]">How It Works</h2>
+                        <p className="text-xl text-[var(--foreground)]/70">
                             Three simple steps to your perfect resume
                         </p>
                     </div>
@@ -189,12 +189,12 @@ const Landing = () => {
             </section>
 
             {/* Testimonials Section */}
-            <section id="testimonials" className="section-padding bg-white">
+            <section id="testimonials" className="section-padding bg-[var(--background)] transition-colors duration-500">
                 <div className="container-custom">
                     <div className="text-center max-w-3xl mx-auto mb-20">
-                        <span className="mono-uppercase text-xs text-black/60 mb-4 block">Testimonials</span>
-                        <h2 className="mb-6 text-black">Loved by Job Seekers</h2>
-                        <p className="text-xl text-black/70">
+                        <span className="mono-uppercase text-xs text-[var(--foreground)]/60 mb-4 block">Testimonials</span>
+                        <h2 className="mb-6 text-[var(--foreground)]">Loved by Job Seekers</h2>
+                        <p className="text-xl text-[var(--foreground)]/70">
                             Join thousands who've landed their dream jobs
                         </p>
                     </div>
@@ -231,16 +231,17 @@ const Landing = () => {
             </section>
 
             {/* CTA Section */}
-            <section id="pricing" className="section-padding bg-pastel-purple">
-                <div className="container-custom text-center">
+            <section id="pricing" className="section-padding relative overflow-hidden">
+                <div className="absolute inset-0 bg-[var(--foreground)] opacity-5 dark:opacity-10" />
+                <div className="container-custom text-center relative z-10">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         className="max-w-3xl mx-auto"
                     >
-                        <h2 className="text-black mb-6">Ready to Build Your Resume?</h2>
-                        <p className="text-xl text-black/70 mb-10 leading-relaxed">
+                        <h2 className="text-[var(--foreground)] mb-6">Ready to Build Your Resume?</h2>
+                        <p className="text-xl text-[var(--foreground)]/70 mb-10 leading-relaxed">
                             Join thousands of successful job seekers. Start creating your professional resume today.
                         </p>
                         <Link to="/create">

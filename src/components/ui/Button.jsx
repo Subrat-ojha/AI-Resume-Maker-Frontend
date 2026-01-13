@@ -13,9 +13,9 @@ const Button = ({
     const baseStyles = 'inline-flex items-center justify-center font-mono uppercase tracking-wider rounded-full transition-all duration-500 ease-out focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed shine-effect'
 
     const variants = {
-        primary: 'text-white bg-black hover:bg-gray-900 focus:ring-gray-500 shadow-lg hover:shadow-black/20',
-        secondary: 'text-black border border-black hover:bg-black hover:text-white focus:ring-black',
-        ghost: 'text-black hover:bg-gray-100 focus:ring-gray-500',
+        primary: 'text-[var(--primary-foreground)] bg-[var(--primary)] hover:opacity-90 focus:ring-gray-500 shadow-lg hover:shadow-[var(--foreground)]/10',
+        secondary: 'text-[var(--foreground)] border border-[var(--border)] hover:bg-[var(--foreground)] hover:text-[var(--background)] focus:ring-[var(--foreground)]',
+        ghost: 'text-[var(--foreground)] hover:bg-[var(--foreground)]/5 focus:ring-gray-500',
     }
 
     const sizes = {
