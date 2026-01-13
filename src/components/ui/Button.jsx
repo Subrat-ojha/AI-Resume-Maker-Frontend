@@ -10,10 +10,10 @@ const Button = ({
     type = 'button',
     ...props
 }) => {
-    const baseStyles = 'inline-flex items-center justify-center font-mono uppercase tracking-wider rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed'
+    const baseStyles = 'inline-flex items-center justify-center font-mono uppercase tracking-wider rounded-full transition-all duration-500 ease-out focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed shine-effect'
 
     const variants = {
-        primary: 'text-white bg-black hover:bg-gray-900 focus:ring-gray-500',
+        primary: 'text-white bg-black hover:bg-gray-900 focus:ring-gray-500 shadow-lg hover:shadow-black/20',
         secondary: 'text-black border border-black hover:bg-black hover:text-white focus:ring-black',
         ghost: 'text-black hover:bg-gray-100 focus:ring-gray-500',
     }
@@ -26,8 +26,8 @@ const Button = ({
 
     return (
         <motion.button
-            whileHover={{ scale: disabled ? 1 : 1.02 }}
-            whileTap={{ scale: disabled ? 1 : 0.98 }}
+            whileHover={{ scale: disabled ? 1 : 1.05, y: -2 }}
+            whileTap={{ scale: disabled ? 1 : 0.95 }}
             className={`${baseStyles} ${variants[variant]} ${sizes[size]} ${className}`}
             onClick={onClick}
             disabled={disabled}

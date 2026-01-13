@@ -61,12 +61,60 @@
     }
 
     .glassmorphism {
-        @apply backdrop-blur-md bg-white/80;
+        @apply backdrop-blur-xl bg-white/40 border border-white/20 shadow-[0_8px_32px_0_rgba(31,38,135,0.07)];
+    }
+
+    .mesh-gradient {
+        background-color: #fdfdfd;
+        background-image:
+            radial-gradient(at 0% 0%, hsla(263,90%,92%,1) 0, transparent 50%),
+            radial-gradient(at 50% 0%, hsla(33,100%,94%,1) 0, transparent 50%),
+            radial-gradient(at 100% 0%, hsla(142,40%,90%,1) 0, transparent 50%);
+    }
+
+    .text-gradient {
+        @apply bg-clip-text text-transparent bg-gradient-to-r from-black via-gray-700 to-black;
     }
 }
 
 @layer utilities {
     .text-balance {
         text-wrap: balance;
+    }
+
+    .animate-float {
+        animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-20px); }
+    }
+
+    .shine-effect {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .shine-effect::after {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: linear-gradient(
+            45deg,
+            transparent,
+            rgba(255, 255, 255, 0.1),
+            transparent
+        );
+        transform: rotate(45deg);
+        transition: 0.5s;
+    }
+
+    .shine-effect:hover::after {
+        left: 120%;
+        top: 120%;
     }
 }
