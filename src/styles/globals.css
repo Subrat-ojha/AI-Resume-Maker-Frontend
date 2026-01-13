@@ -1,0 +1,72 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    body {
+        @apply bg-white text-black font-sans antialiased;
+        scroll-behavior: smooth;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        @apply font-bold;
+        letter-spacing: -0.02em;
+    }
+
+    h1 {
+        @apply text-5xl md:text-6xl lg:text-7xl;
+    }
+
+    h2 {
+        @apply text-4xl md:text-5xl lg:text-6xl;
+    }
+
+    h3 {
+        @apply text-3xl md:text-4xl;
+    }
+
+    h4 {
+        @apply text-2xl md:text-3xl;
+    }
+}
+
+@layer components {
+    .mono-uppercase {
+        @apply font-mono uppercase tracking-wide;
+    }
+
+    .btn-primary {
+        @apply px-8 py-4 rounded-full font-mono uppercase text-sm tracking-wider text-white bg-black hover:bg-gray-900 transition-all duration-300;
+    }
+
+    .btn-secondary {
+        @apply px-8 py-4 rounded-full font-mono uppercase text-sm tracking-wider text-black border border-black hover:bg-black hover:text-white transition-all duration-300;
+    }
+
+    .section-padding {
+        @apply py-20 md:py-32 lg:py-40;
+    }
+
+    .container-custom {
+        @apply max-w-7xl mx-auto px-6 sm:px-8 lg:px-12;
+    }
+
+    .card-pastel {
+        @apply rounded-3xl p-8 md:p-10;
+    }
+
+    .glassmorphism {
+        @apply backdrop-blur-md bg-white/80;
+    }
+}
+
+@layer utilities {
+    .text-balance {
+        text-wrap: balance;
+    }
+}
