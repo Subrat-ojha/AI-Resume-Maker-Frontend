@@ -1,4 +1,5 @@
 import { ContainerScroll } from '../components/ui/container-scroll-animation'
+import { useState, useEffect, useMemo } from 'react'
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { Sparkles, Zap, Shield, Award } from 'lucide-react'
@@ -7,6 +8,21 @@ import Card from '../components/ui/Card'
 
 const Landing = () => {
     // ... existing constants ...
+
+    // Title rotation logic
+    const [titleNumber, setTitleNumber] = useState(0)
+    const titles = useMemo(() => ["in Minutes", "Instantly", "Smartly", "Professionally"], [])
+
+    useEffect(() => {
+        const timeoutId = setTimeout(() => {
+            if (titleNumber === titles.length - 1) {
+                setTitleNumber(0)
+            } else {
+                setTitleNumber(titleNumber + 1)
+            }
+        }, 2000)
+        return () => clearTimeout(timeoutId)
+    }, [titleNumber, titles])
 
     const features = [
         {
@@ -82,21 +98,63 @@ const Landing = () => {
                     titleComponent={
                         <>
                             <motion.div
+                                initial={{ opacity: 0, y: -20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.5 }}
+                                className="mb-8"
+                            >
+                                <h2 className="text-2xl md:text-3xl font-bold text-[var(--foreground)] tracking-tight">
+                                    Future of <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-[#00ff88]">AI Resume Building</span>
+                                </h2>
+                            </motion.div>
+
+                            <motion.div
                                 initial={{ opacity: 0, scale: 0.9 }}
                                 animate={{ opacity: 1, scale: 1 }}
                                 transition={{ delay: 0.2, duration: 0.8 }}
                                 className="inline-block mb-4"
                             >
+                                <motion.p
+                                    initial={{ opacity: 0, y: -20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ duration: 0.8 }}
+                                    className="text-lg md:text-xl font-medium text-[var(--foreground)]/60 mb-6 tracking-wide"
+                                >
+                                    Unlock Your Full Career Potential
+                                </motion.p>
                                 <span className="mono-uppercase text-[10px] px-4 py-2 bg-[var(--foreground)] text-[var(--background)] rounded-full tracking-[0.2em] transition-colors duration-500">
                                     AI-Powered Resume Builder
                                 </span>
                             </motion.div>
-                            <h1 className="text-5xl md:text-8xl font-black text-[var(--foreground)] mb-6 tracking-tighter">
-                                Build Your Resume <br />
-                                <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-[#00ff88]">
-                                    in Minutes
-                                </span>
-                            </h1>
+                            <div className="mb-6">
+                                <h1 className="text-5xl md:text-8xl font-black text-[var(--foreground)] tracking-tighter flex flex-col items-center">
+                                    <span>Build Your Resume</span>
+                                    <span className="relative flex w-full justify-center overflow-hidden text-center md:pb-4 md:pt-1 min-h-[1.2em]">
+                                        &nbsp;
+                                        {["in Minutes", "Instantly", "Smartly", "Professionally"].map((title, index) => (
+                                            <motion.span
+                                                key={index}
+                                                className="absolute font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-[#00ff88]"
+                                                initial={{ opacity: 0, y: "100%" }}
+                                                transition={{ type: "spring", stiffness: 50 }}
+                                                animate={
+                                                    titleNumber === index
+                                                        ? {
+                                                            y: 0,
+                                                            opacity: 1,
+                                                        }
+                                                        : {
+                                                            y: titleNumber > index ? "-150%" : "150%",
+                                                            opacity: 0,
+                                                        }
+                                                }
+                                            >
+                                                {title}
+                                            </motion.span>
+                                        ))}
+                                    </span>
+                                </h1>
+                            </div>
                         </>
                     }
                 >
