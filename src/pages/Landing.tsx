@@ -206,8 +206,8 @@ const Landing = () => {
                                         <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-8 ${feature.bgColor} transition-transform duration-500 hover:rotate-12`}>
                                             <Icon className="w-6 h-6 text-black" strokeWidth={1.5} />
                                         </div>
-                                        <h3 className="text-2xl font-bold mb-4 text-black">{feature.title}</h3>
-                                        <p className="text-black/60 leading-relaxed">{feature.description}</p>
+                                        <h3 className="text-2xl font-bold mb-4 text-black dark:text-white">{feature.title}</h3>
+                                        <p className="text-black/60 dark:text-white/70 leading-relaxed">{feature.description}</p>
                                     </Card>
                                 </motion.div>
                             )
@@ -270,16 +270,16 @@ const Landing = () => {
                                 transition={{ delay: index * 0.1 + 0.2 }}
                             >
                                 <Card glass className="h-full flex flex-col justify-between">
-                                    <p className="text-lg text-black/80 mb-8 leading-relaxed italic">
+                                    <p className="text-lg text-black/80 dark:text-white/80 mb-8 leading-relaxed italic">
                                         "{testimonial.quote}"
                                     </p>
                                     <div className="flex items-center gap-4">
-                                        <div className="w-10 h-10 rounded-full bg-black/5 flex items-center justify-center font-bold text-black/40">
+                                        <div className="w-10 h-10 rounded-full bg-black/5 dark:bg-white/10 flex items-center justify-center font-bold text-black/40 dark:text-white/40">
                                             {testimonial.author[0]}
                                         </div>
                                         <div>
-                                            <div className="font-bold text-black text-sm">{testimonial.author}</div>
-                                            <div className="mono-uppercase text-[10px] text-black/40 mt-0.5 tracking-wider">
+                                            <div className="font-bold text-black text-sm dark:text-white">{testimonial.author}</div>
+                                            <div className="mono-uppercase text-[10px] text-black/40 dark:text-white/40 mt-0.5 tracking-wider">
                                                 {testimonial.role}
                                             </div>
                                         </div>
