@@ -79,4 +79,17 @@ export const api = {
     },
 }
 
+
+export const resumeService = {
+    generate: async (prompt, file) => {
+        await delay(2000)
+
+        // Mock ID generation
+        return {
+            id: Math.random().toString(36).substr(2, 9),
+            status: 'success'
+        }
+    }
+}
+
 export default api

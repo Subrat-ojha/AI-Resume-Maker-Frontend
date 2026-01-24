@@ -21,9 +21,9 @@ const Navbar = () => {
                     {/* Logo */}
                     <Link to="/" className="flex items-center space-x-3 group">
                         <div className="w-10 h-10 rounded-full bg-[var(--foreground)] flex items-center justify-center transition-colors duration-500">
-                            <span className="text-[var(--background)] font-mono font-bold text-lg">AR</span>
+                            <span className="text-[var(--background)] font-mono font-bold text-lg">RX</span>
                         </div>
-                        <span className="text-xl font-bold mono-uppercase text-sm text-[var(--foreground)]">AI Resume</span>
+                        <span className="text-xl font-bold mono text-sm text-[var(--foreground)]">ResumeXpert</span>
                     </Link>
 
                     {/* Desktop Navigation */}
