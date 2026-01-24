@@ -8,10 +8,24 @@
         --foreground: #000000;
         --card: #ffffff;
         --card-foreground: #000000;
+        --popover: #ffffff;
+        --popover-foreground: #000000;
         --primary: #000000;
         --primary-foreground: #ffffff;
-        --border: rgba(0, 0, 0, 0.1);
-        --muted: rgba(0, 0, 0, 0.4);
+        --secondary: #f1f5f9;
+        --secondary-foreground: #0f172a;
+        --muted: #f1f5f9;
+        --muted-foreground: #64748b;
+        --accent: #f1f5f9;
+        --accent-foreground: #0f172a;
+        --destructive: #ef4444;
+        --destructive-foreground: #f8fafc;
+        --border: #e2e8f0;
+        --input: #e2e8f0;
+        --ring: #000000;
+
+        --radius: 0.5rem;
+
         --accent-purple: hsla(263, 90%, 92%, 0.3);
         --accent-sage: hsla(142, 40%, 90%, 0.2);
         --mesh-gradient:
@@ -25,10 +39,22 @@
         --foreground: #ffffff;
         --card: #0a0a0a;
         --card-foreground: #ffffff;
+        --popover: #000000;
+        --popover-foreground: #ffffff;
         --primary: #ffffff;
         --primary-foreground: #000000;
-        --border: rgba(255, 255, 255, 0.1);
-        --muted: rgba(255, 255, 255, 0.4);
+        --secondary: #1e293b;
+        --secondary-foreground: #f8fafc;
+        --muted: #1e293b;
+        --muted-foreground: #94a3b8;
+        --accent: #1e293b;
+        --accent-foreground: #f8fafc;
+        --destructive: #7f1d1d;
+        --destructive-foreground: #f8fafc;
+        --border: #1e293b;
+        --input: #1e293b;
+        --ring: #ffffff;
+
         --accent-purple: hsla(263, 90%, 15%, 0.3);
         --accent-sage: hsla(142, 40%, 10%, 0.2);
         --mesh-gradient:
@@ -95,7 +121,7 @@
     }
 
     .glassmorphism {
-        @apply backdrop-blur-xl bg-white/40 dark:bg-white/5 border border-white/20 dark:border-white/10 shadow-[0_8px_32px_0_rgba(31,38,135,0.07)] dark:shadow-none;
+        @apply backdrop-blur-xl bg-white/40 dark:bg-white/5 border border-white/20 dark:border-white/10 shadow-[0_8px_32px_0_#1f268712] dark:shadow-none;
     }
 
     .mesh-gradient {

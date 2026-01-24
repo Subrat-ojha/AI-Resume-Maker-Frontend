@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Menu, X } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
-import Button from '../ui/Button'
+import Button from '../ui/animated-button'
 import ThemeToggle from '../ui/ThemeToggle'
 
 const Navbar = () => {
@@ -42,6 +42,9 @@ const Navbar = () => {
                     {/* Desktop CTA */}
                     <div className="hidden md:flex items-center space-x-4">
                         <ThemeToggle />
+                        <Link to="/login" className="text-sm font-medium text-[var(--foreground)]/60 hover:text-[var(--foreground)] transition-colors">
+                            Login
+                        </Link>
                         <Link to="/create">
                             <Button variant="primary" size="sm">
                                 Get Started

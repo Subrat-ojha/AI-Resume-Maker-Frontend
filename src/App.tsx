@@ -6,6 +6,7 @@ import PromptInput from './pages/PromptInput'
 import Processing from './pages/Processing'
 import ResumeOutput from './pages/ResumeOutput'
 import Dashboard from './pages/Dashboard'
+import LoginPage from './pages/login-page'
 
 import { ThemeProvider } from './contexts/ThemeContext'
 
@@ -22,6 +23,7 @@ function App() {
                             <Route path="/processing" element={<Processing />} />
                             <Route path="/resume/:id" element={<ResumeOutput />} />
                             <Route path="/dashboard" element={<Dashboard />} />
+                            <Route path="/login" element={<LoginPage />} />
                         </Routes>
                     </main>
                     <Footer />

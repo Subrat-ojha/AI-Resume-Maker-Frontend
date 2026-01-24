@@ -3,8 +3,8 @@ import { useState, useEffect, useMemo } from 'react'
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { Sparkles, Zap, Shield, Award } from 'lucide-react'
-import Button from '../components/ui/Button'
-import Card from '../components/ui/Card'
+import Button from '../components/ui/animated-button'
+import Card from '../components/ui/animated-card'
 import resumeImage from '../assets/resume-example.png'
 
 const Landing = () => {

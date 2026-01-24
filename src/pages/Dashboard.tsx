@@ -1,8 +1,8 @@
 import { motion } from 'framer-motion'
 import { FileText, Plus, Clock, Download } from 'lucide-react'
 import { Link } from 'react-router-dom'
-import Button from '../components/ui/Button'
-import Card from '../components/ui/Card'
+import Button from '../components/ui/animated-button'
+import Card from '../components/ui/animated-card'
 
 const Dashboard = () => {
     // Mock data for saved resumes

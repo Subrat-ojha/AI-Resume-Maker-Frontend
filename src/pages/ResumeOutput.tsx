@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import { Download, Edit, Share2, Copy, CheckCircle2 } from 'lucide-react'
-import Button from '../components/ui/Button'
-import Card from '../components/ui/Card'
+import Button from '../components/ui/animated-button'
+import Card from '../components/ui/animated-card'
 
 const ResumeOutput = () => {
     // Mock resume data
