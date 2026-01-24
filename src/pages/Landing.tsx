@@ -1,3 +1,4 @@
+import { ContainerScroll } from '../components/ui/container-scroll-animation'
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { Sparkles, Zap, Shield, Award } from 'lucide-react'
@@ -5,6 +6,8 @@ import Button from '../components/ui/Button'
 import Card from '../components/ui/Card'
 
 const Landing = () => {
+    // ... existing constants ...
+
     const features = [
         {
             icon: Sparkles,
@@ -74,49 +77,62 @@ const Landing = () => {
     return (
         <div className="overflow-hidden selection:bg-black selection:text-white">
             {/* Hero Section */}
-            <section className="section-padding mesh-gradient min-h-[90vh] flex items-center relative overflow-hidden">
-                {/* Decorative floating elements */}
-                <div className="absolute top-20 left-10 w-64 h-64 bg-pastel-purple/30 rounded-full blur-3xl animate-float" />
-                <div className="absolute bottom-20 right-10 w-96 h-96 bg-pastel-sage/20 rounded-full blur-3xl animate-float" style={{ animationDelay: '-3s' }} />
+            <section className="min-h-screen bg-[var(--background)] relative overflow-hidden flex flex-col items-center">
+                <ContainerScroll
+                    titleComponent={
+                        <>
+                            <motion.div
+                                initial={{ opacity: 0, scale: 0.9 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                transition={{ delay: 0.2, duration: 0.8 }}
+                                className="inline-block mb-4"
+                            >
+                                <span className="mono-uppercase text-[10px] px-4 py-2 bg-[var(--foreground)] text-[var(--background)] rounded-full tracking-[0.2em] transition-colors duration-500">
+                                    AI-Powered Resume Builder
+                                </span>
+                            </motion.div>
+                            <h1 className="text-5xl md:text-8xl font-black text-[var(--foreground)] mb-6 tracking-tighter">
+                                Build Your Resume <br />
+                                <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-[#00ff88]">
+                                    in Minutes
+                                </span>
+                            </h1>
+                        </>
+                    }
+                >
+                    <div className="w-full h-full bg-[#1a1a1a] rounded-2xl flex items-center justify-center p-8 relative overflow-hidden group">
+                        {/* Mock Resume UI inside the card */}
+                        <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-[#00ff88]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
 
-                <div className="container-custom relative z-10">
-                    <motion.div
-                        initial={{ opacity: 0, y: 30 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-                        className="text-center max-w-5xl mx-auto"
-                    >
-                        <motion.div
-                            initial={{ opacity: 0, scale: 0.9 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            transition={{ delay: 0.5, duration: 0.8 }}
-                            className="inline-block mb-8"
-                        >
-                            <span className="mono-uppercase text-[10px] px-4 py-2 bg-[var(--foreground)] text-[var(--background)] rounded-full tracking-[0.2em] transition-colors duration-500">
-                                AI-Powered Resume Builder
-                            </span>
-                        </motion.div>
+                        <div className="w-full max-w-4xl bg-white rounded-lg shadow-2xl overflow-hidden flex aspect-[1.4/1]">
+                            {/* Simple Resume Visual */}
+                            <div className="w-1/3 bg-gray-900 p-8 flex flex-col gap-6">
+                                <div className="w-24 h-24 rounded-full bg-gray-800 border-2 border-[#00ff88] mx-auto" />
+                                <div className="space-y-3">
+                                    <div className="h-2 w-full bg-white/10 rounded" />
+                                    <div className="h-2 w-2/3 bg-white/10 rounded" />
+                                    <div className="h-2 w-3/4 bg-white/10 rounded" />
+                                </div>
+                            </div>
+                            <div className="flex-1 p-8 space-y-6">
+                                <div className="h-8 w-1/2 bg-gray-200 rounded" />
+                                <div className="space-y-4">
+                                    <div className="h-4 w-full bg-gray-100 rounded" />
+                                    <div className="h-4 w-full bg-gray-100 rounded" />
+                                    <div className="h-4 w-3/4 bg-gray-100 rounded" />
+                                </div>
+                            </div>
+                        </div>
 
-                        <h1 className="mb-8 text-[var(--foreground)] text-balance">
-                            Create Your Perfect Resume in <span className="text-gradient">Minutes</span>
-                        </h1>
-
-                        <p className="text-xl md:text-2xl text-[var(--foreground)]/60 mb-12 max-w-3xl mx-auto leading-relaxed text-balance">
-                            Transform your career story into a compelling, ATS-optimized resume with AI. No design skills required.
-                        </p>
-
-                        <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+                        <div className="absolute bottom-10 flex gap-4">
                             <Link to="/create">
-                                <Button variant="primary" size="lg" className="min-w-[200px]">
+                                <Button variant="primary" size="lg" className="shadow-xl">
                                     Get Started Free
                                 </Button>
                             </Link>
-                            <Button variant="secondary" size="lg" className="min-w-[200px]">
-                                View Examples
-                            </Button>
                         </div>
-                    </motion.div>
-                </div>
+                    </div>
+                </ContainerScroll>
             </section>
 
             {/* Features Section */}
