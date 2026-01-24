@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import { Sparkles, Zap, Shield, Award } from 'lucide-react'
 import Button from '../components/ui/Button'
 import Card from '../components/ui/Card'
+import resumeImage from '../assets/resume-example.png'
 
 const Landing = () => {
     // ... existing constants ...
@@ -120,7 +121,7 @@ const Landing = () => {
                                     transition={{ duration: 0.8 }}
                                     className="text-lg md:text-xl font-medium text-[var(--foreground)]/60 mb-6 tracking-wide"
                                 >
-                                    Unlock Your Full Career Potential
+
                                 </motion.p>
                                 <span className="mono-uppercase text-[10px] px-4 py-2 bg-[var(--foreground)] text-[var(--background)] rounded-full tracking-[0.2em] transition-colors duration-500">
                                     AI-Powered Resume Builder
@@ -162,33 +163,19 @@ const Landing = () => {
                         {/* Mock Resume UI inside the card */}
                         <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-[#00ff88]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
 
-                        <div className="w-full max-w-4xl bg-white rounded-lg shadow-2xl overflow-hidden flex aspect-[1.4/1]">
-                            {/* Simple Resume Visual */}
-                            <div className="w-1/3 bg-gray-900 p-8 flex flex-col gap-6">
-                                <div className="w-24 h-24 rounded-full bg-gray-800 border-2 border-[#00ff88] mx-auto" />
-                                <div className="space-y-3">
-                                    <div className="h-2 w-full bg-white/10 rounded" />
-                                    <div className="h-2 w-2/3 bg-white/10 rounded" />
-                                    <div className="h-2 w-3/4 bg-white/10 rounded" />
-                                </div>
-                            </div>
-                            <div className="flex-1 p-8 space-y-6">
-                                <div className="h-8 w-1/2 bg-gray-200 rounded" />
-                                <div className="space-y-4">
-                                    <div className="h-4 w-full bg-gray-100 rounded" />
-                                    <div className="h-4 w-full bg-gray-100 rounded" />
-                                    <div className="h-4 w-3/4 bg-gray-100 rounded" />
-                                </div>
-                            </div>
-                        </div>
+                        <img
+                            src={resumeImage}
+                            alt="AI Generated Resume Example"
+                            className="w-full h-full object-contain rounded-lg shadow-2xl"
+                        />
 
-                        <div className="absolute bottom-10 flex gap-4">
+                        {/* <div className="absolute bottom-10 flex gap-4">
                             <Link to="/create">
                                 <Button variant="primary" size="lg" className="shadow-xl">
-                                    Get Started Free
+                                    Create Resume
                                 </Button>
                             </Link>
-                        </div>
+                        </div> */}
                     </div>
                 </ContainerScroll>
             </section>
