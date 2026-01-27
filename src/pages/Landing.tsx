@@ -2,7 +2,7 @@ import { ContainerScroll } from '../components/ui/container-scroll-animation'
 import { useState, useEffect, useMemo } from 'react'
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import { Sparkles, Zap, Shield, Award } from 'lucide-react'
+import { Sparkles, Zap, Shield, Award, Play, TrendingUp, Users, Star, CheckCircle2, ArrowRight } from 'lucide-react'
 import Button from '../components/ui/animated-button'
 import Card from '../components/ui/animated-card'
 import resumeImage from '../assets/resume-example.png'
@@ -156,6 +156,54 @@ const Landing = () => {
                                     </span>
                                 </h1>
                             </div>
+
+                            {/* Statistics Bar */}
+                            <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.4, duration: 0.8 }}
+                                className="flex flex-wrap gap-6 md:gap-12 justify-center items-center mb-8 text-[var(--foreground)]/70"
+                            >
+                                <div className="flex items-center gap-2">
+                                    <Users className="w-5 h-5 text-purple-500" />
+                                    <span className="font-semibold text-[var(--foreground)]">10,000+</span>
+                                    <span className="text-sm">Resumes Created</span>
+                                </div>
+                                <div className="flex items-center gap-2">
+                                    <TrendingUp className="w-5 h-5 text-[#00ff88]" />
+                                    <span className="font-semibold text-[var(--foreground)]">95%</span>
+                                    <span className="text-sm">Interview Rate</span>
+                                </div>
+                                <div className="flex items-center gap-2">
+                                    <Star className="w-5 h-5 text-yellow-500 fill-yellow-500" />
+                                    <span className="font-semibold text-[var(--foreground)]">4.9</span>
+                                    <span className="text-sm">Rating</span>
+                                </div>
+                            </motion.div>
+
+                            {/* CTA Buttons */}
+                            <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.6, duration: 0.8 }}
+                                className="flex flex-col items-center gap-4 mb-6"
+                            >
+                                <div className="flex flex-col sm:flex-row gap-4">
+                                    <Link to="/create">
+                                        <Button variant="primary" size="lg" className="shadow-2xl">
+                                            Get Started Free
+                                        </Button>
+                                    </Link>
+                                    <Button variant="secondary" size="lg" className="gap-2">
+                                        <Play className="w-4 h-4" />
+                                        View Examples
+                                    </Button>
+                                </div>
+                                <p className="text-sm text-[var(--foreground)]/50 flex items-center gap-2">
+                                    <CheckCircle2 className="w-4 h-4" />
+                                    No credit card required • Free forever
+                                </p>
+                            </motion.div>
                         </>
                     }
                 >
@@ -180,6 +228,34 @@ const Landing = () => {
                 </ContainerScroll>
             </section>
 
+            {/* Statistics Section */}
+            <section className="section-padding bg-[var(--background)] border-y border-[var(--border)] transition-colors duration-500">
+                <div className="container-custom">
+                    <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+                        {[
+                            { number: '10,000+', label: 'Resumes Created', bgColor: 'bg-pastel-purple' },
+                            { number: '95%', label: 'Interview Success', bgColor: 'bg-pastel-peach' },
+                            { number: '4.9★', label: 'User Rating', bgColor: 'bg-pastel-sage' },
+                            { number: '< 5min', label: 'Average Time', bgColor: 'bg-pastel-purple' },
+                        ].map((stat, index) => (
+                            <motion.div
+                                key={index}
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: index * 0.1, duration: 0.5 }}
+                                className="text-center"
+                            >
+                                <div className={`inline-block px-6 py-3 rounded-2xl ${stat.bgColor} mb-4`}>
+                                    <div className="text-4xl md:text-5xl font-black text-black">{stat.number}</div>
+                                </div>
+                                <div className="text-lg text-[var(--foreground)]/70 font-medium">{stat.label}</div>
+                            </motion.div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
             {/* Features Section */}
             <section id="features" className="section-padding bg-[var(--background)] transition-colors duration-500">
                 <div className="container-custom">
@@ -202,12 +278,16 @@ const Landing = () => {
                                     viewport={{ once: true }}
                                     transition={{ delay: index * 0.1 + 0.3, duration: 0.8 }}
                                 >
-                                    <Card glass className="h-full">
-                                        <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-8 ${feature.bgColor} transition-transform duration-500 hover:rotate-12`}>
+                                    <Card glass className="h-full flex flex-col">
+                                        <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-8 ${feature.bgColor} transition-transform duration-500 hover:rotate-12 relative group-hover:shadow-lg`}>
                                             <Icon className="w-6 h-6 text-black" strokeWidth={1.5} />
+                                            <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                                         </div>
                                         <h3 className="text-2xl font-bold mb-4 text-black dark:text-white">{feature.title}</h3>
-                                        <p className="text-black/60 dark:text-white/70 leading-relaxed">{feature.description}</p>
+                                        <p className="text-black/60 dark:text-white/70 leading-relaxed mb-6 flex-grow">{feature.description}</p>
+                                        <a href="#" className="text-sm font-semibold text-purple-600 dark:text-purple-400 flex items-center gap-1 hover:gap-2 transition-all">
+                                            Learn more <ArrowRight className="w-4 h-4" />
+                                        </a>
                                     </Card>
                                 </motion.div>
                             )
@@ -270,11 +350,18 @@ const Landing = () => {
                                 transition={{ delay: index * 0.1 + 0.2 }}
                             >
                                 <Card glass className="h-full flex flex-col justify-between">
-                                    <p className="text-lg text-black/80 dark:text-white/80 mb-8 leading-relaxed italic">
-                                        "{testimonial.quote}"
-                                    </p>
+                                    <div>
+                                        <div className="flex gap-1 mb-4">
+                                            {[1, 2, 3, 4, 5].map((star) => (
+                                                <Star key={star} className="w-4 h-4 text-yellow-500 fill-yellow-500" />
+                                            ))}
+                                        </div>
+                                        <p className="text-lg text-black/80 dark:text-white/80 mb-8 leading-relaxed italic">
+                                            "{testimonial.quote}"
+                                        </p>
+                                    </div>
                                     <div className="flex items-center gap-4">
-                                        <div className="w-10 h-10 rounded-full bg-black/5 dark:bg-white/10 flex items-center justify-center font-bold text-black/40 dark:text-white/40">
+                                        <div className="w-12 h-12 rounded-full bg-gradient-to-br from-purple-500 to-[#00ff88] flex items-center justify-center font-bold text-white shadow-lg">
                                             {testimonial.author[0]}
                                         </div>
                                         <div>
@@ -292,24 +379,77 @@ const Landing = () => {
             </section>
 
             {/* CTA Section */}
-            <section id="pricing" className="section-padding relative overflow-hidden">
+            <section id="pricing" className="section-padding relative overflow-hidden bg-gradient-to-br from-purple-50 to-[#00ff88]/10 dark:from-purple-950/20 dark:to-[#00ff88]/5">
                 <div className="absolute inset-0 bg-[var(--foreground)] opacity-5 dark:opacity-10" />
-                <div className="container-custom text-center relative z-10">
+                <div className="container-custom relative z-10">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        className="max-w-3xl mx-auto"
+                        className="max-w-5xl mx-auto"
                     >
-                        <h2 className="text-[var(--foreground)] mb-6">Ready to Build Your Resume?</h2>
-                        <p className="text-xl text-[var(--foreground)]/70 mb-10 leading-relaxed">
-                            Join thousands of successful job seekers. Start creating your professional resume today.
-                        </p>
-                        <Link to="/create">
-                            <Button variant="primary" size="lg">
-                                Get Started Now
-                            </Button>
-                        </Link>
+                        <div className="grid md:grid-cols-2 gap-12 items-center">
+                            <div className="text-left">
+                                <h2 className="text-[var(--foreground)] mb-6">Ready to Build Your Resume?</h2>
+                                <p className="text-xl text-[var(--foreground)]/70 mb-8 leading-relaxed">
+                                    Join thousands of successful job seekers. Start creating your professional resume today.
+                                </p>
+                                <ul className="space-y-4 mb-8">
+                                    {[
+                                        'AI-powered content generation',
+                                        'ATS-optimized templates',
+                                        'Instant download & editing',
+                                        'Free forever, no credit card'
+                                    ].map((item, i) => (
+                                        <li key={i} className="flex items-center gap-3 text-[var(--foreground)]/80">
+                                            <CheckCircle2 className="w-5 h-5 text-[#00ff88] flex-shrink-0" />
+                                            <span>{item}</span>
+                                        </li>
+                                    ))}
+                                </ul>
+                                <div className="flex flex-col sm:flex-row gap-4">
+                                    <Link to="/create">
+                                        <Button variant="primary" size="lg" className="shadow-2xl">
+                                            Get Started Now
+                                        </Button>
+                                    </Link>
+                                    <Link to="#features">
+                                        <Button variant="secondary" size="lg">
+                                            Learn More
+                                        </Button>
+                                    </Link>
+                                </div>
+                            </div>
+                            <div className="relative">
+                                <div className="absolute inset-0 bg-gradient-to-br from-purple-500/20 to-[#00ff88]/20 blur-3xl" />
+                                <Card glass className="relative">
+                                    <div className="space-y-4">
+                                        <div className="flex items-center justify-between">
+                                            <span className="text-2xl font-bold text-[var(--foreground)]">Free Plan</span>
+                                            <span className="text-sm px-3 py-1 rounded-full bg-[#00ff88] text-black font-semibold">Popular</span>
+                                        </div>
+                                        <div className="flex items-baseline gap-2">
+                                            <span className="text-5xl font-black text-[var(--foreground)]">$0</span>
+                                            <span className="text-[var(--foreground)]/60">/forever</span>
+                                        </div>
+                                        <div className="pt-6 space-y-3">
+                                            {[
+                                                'Unlimited resumes',
+                                                'AI content generation',
+                                                'All templates',
+                                                'PDF & DOCX export',
+                                                'ATS optimization'
+                                            ].map((feature, i) => (
+                                                <div key={i} className="flex items-center gap-2 text-black/70 dark:text-white/70">
+                                                    <CheckCircle2 className="w-4 h-4 text-[#00ff88]" />
+                                                    <span className="text-sm">{feature}</span>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                </Card>
+                            </div>
+                        </div>
                     </motion.div>
                 </div>
             </section>

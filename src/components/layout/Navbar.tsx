@@ -75,20 +75,25 @@ const Navbar = () => {
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: 'auto' }}
                         exit={{ opacity: 0, height: 0 }}
-                        className="md:hidden border-t border-gray-200 bg-white"
+                        className="md:hidden border-t border-[var(--border)] bg-[var(--background)]"
                     >
                         <div className="container-custom py-6 space-y-4">
                             {navigation.map((item) => (
                                 <a
                                     key={item.name}
                                     href={item.href}
-                                    className="block px-4 py-3 mono-uppercase text-xs text-black hover:bg-gray-50 rounded-lg transition-colors"
+                                    className="block px-4 py-3 mono-uppercase text-xs text-[var(--foreground)] hover:bg-[var(--foreground)]/5 rounded-lg transition-colors"
                                     onClick={() => setMobileMenuOpen(false)}
                                 >
                                     {item.name}
                                 </a>
                             ))}
-                            <div className="pt-4">
+                            <div className="pt-4 space-y-3">
+                                <Link to="/login" className="block" onClick={() => setMobileMenuOpen(false)}>
+                                    <Button variant="secondary" size="sm" className="w-full">
+                                        Login
+                                    </Button>
+                                </Link>
                                 <Link to="/create" className="block" onClick={() => setMobileMenuOpen(false)}>
                                     <Button variant="primary" size="sm" className="w-full">
                                         Get Started
