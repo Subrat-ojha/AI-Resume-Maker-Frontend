@@ -1,9 +1,12 @@
-// Mock API utilities for demonstration
-// Replace these with actual API calls to your backend
+// Re-export from new API modules for backward compatibility
+// This file is deprecated - import from src/api/ modules directly
 
-// Simulate network delay
-const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
+import api from '../api/api';
+export { api };
+export * from '../api/auth';
+export * from '../api/resume';
 
+// Legacy types for backward compatibility
 export interface ResumeData {
     name?: string;
     title?: string;
@@ -32,122 +35,62 @@ export interface ApiResponse<T> {
     [key: string]: any;
 }
 
-export const api = {
-    // Generate resume from prompt
-    generateResume: async (prompt: string): Promise<Resume> => {
-        await delay(1500)
-
-        // Mock response - replace with actual API call
-        return {
-            id: Math.random().toString(36).substr(2, 9),
-            status: 'success',
-            data: {
-                name: 'John Doe',
-                title: 'Software Engineer',
-                summary: 'Generated summary based on your prompt...',
-                experience: [],
-                skills: [],
-            },
-        }
-    },
-
-    // Get resume by ID
-    getResume: async (id: string): Promise<Resume> => {
-        await delay(500)
-
-        return {
-            id,
-            status: 'completed',
-            data: {
-                name: 'John Doe',
-                title: 'Software Engineer',
-            }
-        }
-    },
-
-    // Get all user resumes
-    getResumes: async (): Promise<Resume[]> => {
-        await delay(500)
-
-        return [
-            {
-                id: '1',
-                title: 'Software Engineer Resume',
-                lastModified: new Date().toISOString(),
-                status: 'completed',
-            },
-            // ... more resumes
-        ]
-    },
-
-    // Update resume
-    updateResume: async (id: string, data: any): Promise<Resume> => {
-        await delay(500)
-
-        return {
-            id,
-            status: 'success',
-            ...data,
-            updatedAt: new Date().toISOString(),
-        }
-    },
-
-    // Delete resume
-    deleteResume: async (id: string): Promise<{ success: boolean }> => {
-        await delay(500)
-
-        return { success: true }
-    },
-
-    // Download resume as PDF
-    downloadResume: async (id: string): Promise<{ success: boolean; url: string }> => {
-        await delay(1000)
-
-        // In a real implementation, this would return a blob or trigger a download
-        return { success: true, url: `/downloads/resume-${id}.pdf` }
-    },
-}
+// Legacy auth service wrapper
+import * as authApi from '../api/auth';
 
 export const authService = {
     login: async (email: string, password: string) => {
-        await delay(1000)
+        const response = await authApi.login({ email, password });
         return {
-            token: 'mock-jwt-token',
-            user: {
-                id: '1',
-                email,
-                name: 'John Doe',
-                role: 'user'
-            }
-        }
+            token: response.data.token,
+            user: response.data
+        };
     },
     register: async (userData: any) => {
-        await delay(1000)
+        const response = await authApi.register(userData);
         return {
-            token: 'mock-jwt-token',
-            user: {
-                id: '1',
-                email: userData.email,
-                name: userData.name,
-                role: 'user'
-            }
-        }
+            token: '',
+            user: response.data
+        };
     },
     logout: () => {
-        localStorage.removeItem('token')
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
     }
-}
+};
+
+// Legacy resume service wrapper
+import * as resumeApi from '../api/resume';
 
 export const resumeService = {
     generate: async (prompt: string, file: File | null): Promise<Resume> => {
-        await delay(2000)
-
-        // Mock ID generation
-        return {
-            id: Math.random().toString(36).substr(2, 9),
-            status: 'success'
+        if (file) {
+            // Use optimize endpoint for existing resume
+            const response = await resumeApi.optimizeResume(file, prompt);
+            return {
+                id: response.data.downloadUrl,
+                status: 'success'
+            };
+        } else {
+            // For now, mock the response until we implement proper prompt parsing
+            // The backend expects structured data, not just a prompt string
+            const response = await resumeApi.generateResume({
+                templateId: 'modern',
+                outputFormat: 'docx',
+                prompt: {
+                    role: prompt,
+                    experienceYears: 0,
+                    skills: [],
+                    projects: [],
+                    tone: 'professional'
+                }
+            });
+            return {
+                id: response.data.downloadUrl,
+                status: 'success'
+            };
         }
     }
-}
+};
 
-export default api
+export default api;

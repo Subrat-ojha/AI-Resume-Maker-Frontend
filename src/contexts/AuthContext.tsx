@@ -1,20 +1,29 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { authService } from '../utils/api';
+import * as authApi from '../api/auth';
 
-interface User {
-    id?: string;
-    email?: string;
-    name?: string;
+export interface User {
+    id: string;
+    name: string;
+    email: string;
+    profileImageUrl?: string;
+    emailVerified: boolean;
+    subscriptionPlan: string;
     token?: string;
-    [key: string]: any;
+    createdAt?: string;
+    updatedAt?: string;
 }
 
 interface AuthContextType {
     user: User | null;
     loading: boolean;
-    login: (email: string, password: string) => Promise<any>;
-    register: (userData: any) => Promise<any>;
+    login: (email: string, password: string) => Promise<authApi.LoginResponse>;
+    register: (data: authApi.RegisterRequest) => Promise<authApi.User>;
     logout: () => void;
+    verifyOtp: (email: string, otp: string) => Promise<authApi.MessageResponse>;
+    resendOtp: (email: string) => Promise<authApi.MessageResponse>;
+    forgotPassword: (email: string) => Promise<authApi.MessageResponse>;
+    resetPassword: (email: string, otp: string, newPassword: string) => Promise<authApi.MessageResponse>;
+    refreshProfile: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -28,35 +37,92 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const token = localStorage.getItem('token');
-        if (token) {
-            // In a real app, you might want to verify the token with the backend here
-            setUser({ token, name: 'John Doe' }); // Restoring mock user
-        }
-        setLoading(false);
+        const initAuth = async () => {
+            const token = localStorage.getItem('token');
+            const savedUser = localStorage.getItem('user');
+
+            if (token && savedUser) {
+                try {
+                    // Verify token by fetching profile
+                    const response = await authApi.getProfile();
+                    setUser({ ...response.data, token });
+                } catch (error) {
+                    // Token invalid, clear storage
+                    localStorage.removeItem('token');
+                    localStorage.removeItem('user');
+                }
+            }
+            setLoading(false);
+        };
+
+        initAuth();
     }, []);
 
     const login = async (email: string, password: string) => {
-        const data = await authService.login(email, password);
-        setUser({ token: data.token, ...data.user });
-        localStorage.setItem('token', data.token);
-        return data;
+        const response = await authApi.login({ email, password });
+        const userData = response.data;
+
+        // Store token and user
+        localStorage.setItem('token', userData.token);
+        localStorage.setItem('user', JSON.stringify(userData));
+        setUser(userData);
+
+        return userData;
     };
 
-    const register = async (userData: any) => {
-        const data = await authService.register(userData);
-        setUser({ token: data.token, ...data.user });
-        localStorage.setItem('token', data.token);
-        return data;
+    const register = async (data: authApi.RegisterRequest) => {
+        const response = await authApi.register(data);
+        // Don't auto-login after registration - user must verify OTP first
+        return response.data;
+    };
+
+    const verifyOtp = async (email: string, otp: string) => {
+        const response = await authApi.verifyOtp({ email, otp });
+        return response.data;
+    };
+
+    const resendOtp = async (email: string) => {
+        const response = await authApi.resendOtp(email);
+        return response.data;
+    };
+
+    const forgotPassword = async (email: string) => {
+        const response = await authApi.forgotPassword(email);
+        return response.data;
+    };
+
+    const resetPassword = async (email: string, otp: string, newPassword: string) => {
+        const response = await authApi.resetPassword({ email, otp, newPassword });
+        return response.data;
+    };
+
+    const refreshProfile = async () => {
+        const token = localStorage.getItem('token');
+        if (token) {
+            const response = await authApi.getProfile();
+            setUser({ ...response.data, token });
+        }
     };
 
     const logout = () => {
-        authService.logout();
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
         setUser(null);
     };
 
     return (
-        <AuthContext.Provider value={{ user, login, register, logout, loading }}>
+        <AuthContext.Provider value={{
+            user,
+            loading,
+            login,
+            register,
+            logout,
+            verifyOtp,
+            resendOtp,
+            forgotPassword,
+            resetPassword,
+            refreshProfile
+        }}>
             {!loading && children}
         </AuthContext.Provider>
     );
